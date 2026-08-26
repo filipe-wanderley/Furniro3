@@ -35,9 +35,6 @@ const App = () => {
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      <Container className="bg-primary border-t border-t-[rgba(0,0,0,0.17)]">
-        <Footer />
-      </Container>
     </>
   );
 };
