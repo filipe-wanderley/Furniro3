@@ -1,38 +1,47 @@
 export class HttpException extends Error {
-    constructor(public message: string, public readonly statusCode: number, ) {
-        super(message);
-        this.name = this.constructor.name;
+  constructor(
+    public message: string,
+    public readonly statusCode: number,
+  ) {
+    super(message);
+    this.name = this.constructor.name;
 
-        Object.setPrototypeOf(this, new.target.prototype);
-    }
+    Object.setPrototypeOf(this, new.target.prototype);
+  }
 
-    toJSON(){
-        return{
-            error: this.message
-        }
-    }
+  toJSON() {
+    return {
+      error: this.message,
+    };
+  }
 }
 
 export class BadRequestException extends HttpException {
-    constructor(message: string) {
-        super(message, 400);
-    }
+  constructor(message: string) {
+    super(message, 400);
+  }
 }
 
 export class NotFoundException extends HttpException {
-    constructor(message: string) {
-        super(message, 404);
-    }
+  constructor(message: string) {
+    super(message, 404);
+  }
 }
 
 export class ConflictException extends HttpException {
-    constructor(message: string) {
-        super(message, 409);
-    }
+  constructor(message: string) {
+    super(message, 409);
+  }
+}
+
+export class UnauthorizedException extends HttpException {
+  constructor(message = "Authentication required") {
+    super(message, 401);
+  }
 }
 
 export class InternalServerErrorException extends HttpException {
-    constructor() {
-        super('Internal Server Error', 500);
-    }
+  constructor() {
+    super("Internal Server Error", 500);
+  }
 }

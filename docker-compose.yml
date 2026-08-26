@@ -1,69 +1,71 @@
 services:
-    mongodb:
-        image: mongo:8
+  mongodb:
+    image: mongo:8
 
-        ports:
-            - "27017:27017"
+    ports:
+      - "27017:27017"
 
-        volumes:
-            - mongo_data:/data/db
+    volumes:
+      - mongo_data:/data/db
 
-        command: ["--replSet", "rs0", "--bind_ip_all"]
+    command: ["--replSet", "rs0", "--bind_ip_all"]
 
-        healthcheck:
-            test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
-            interval: 10s
-            timeout: 10s
-            retries: 5
-            start_period: 40s
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
 
-    mongo-init:
-        image: mongo:8
-        depends_on:
-            mongodb:
-                condition: service_healthy
-        restart: no
-        entrypoint: >
-            mongosh --host mongodb:27017
-            --eval "try { rs.initiate({_id:'rs0',members:[{_id:0,host:'mongodb:27017'}]}) } catch(e) { if(e.codeName !== 'AlreadyInitialized') throw e }"
+  mongo-init:
+    image: mongo:8
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    restart: no
+    entrypoint: >
+      mongosh --host mongodb:27017
+      --eval "try { rs.initiate({_id:'rs0',members:[{_id:0,host:'mongodb:27017'}]}) } catch(e) { if(e.codeName !== 'AlreadyInitialized') throw e }"
 
-    backend:
-        build:
-            context: ./backend
-            dockerfile: dockerfile.dev
+  backend:
+    build:
+      context: ./backend
+      dockerfile: dockerfile.dev
 
-        ports:
-            - "3000:3000"
+    ports:
+      - "3000:3000"
 
-        volumes:
-            - ./backend:/app
-            - /app/node_modules
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
 
-        environment:
-            NODE_ENV: development
-            DATABASE_URL: mongodb://mongodb:27017/furniro?replicaSet=rs0&directConnection=true
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: mongodb://mongodb:27017/furniro?replicaSet=rs0&directConnection=true
+      JWT_SECRET: replace-with-a-local-development-secret
+      JWT_EXPIRES_IN: 1d
 
-        depends_on:
-            mongo-init:
-                condition: service_completed_successfully
+    depends_on:
+      mongo-init:
+        condition: service_completed_successfully
 
-    frontend:
-        build:
-            context: ./frontend
-            dockerfile: dockerfile.dev
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dockerfile.dev
 
-        ports:
-            - "5173:5173"
+    ports:
+      - "5173:5173"
 
-        volumes:
-            - ./frontend:/app
-            - /app/node_modules
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
 
-        depends_on:
-            - backend
+    depends_on:
+      - backend
 
-        environment:
-            VITE_API_URL: http://localhost:3000
+    environment:
+      VITE_API_URL: http://localhost:3000
 
 volumes:
-    mongo_data:
+  mongo_data:

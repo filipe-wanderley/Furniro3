@@ -5,14 +5,18 @@ import NavMenu from "../NavMenu";
 import RightMenu from "../RigthMenu";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+type HeaderProps = {
+  onCartClick: () => void;
+  cartButtonRef: React.RefObject<HTMLButtonElement | null>;
+};
+const Header = ({ onCartClick, cartButtonRef }: HeaderProps) => {
   return (
     <div>
       <div
         className={clsx(
           "flex justify-center items-center",
           "h-25 w-full max-w-360",
-          "fixed z-50",
+          "sticky top-0 z-50",
           "bg-primary",
         )}
       >
@@ -28,12 +32,18 @@ const Header = () => {
             <Logo></Logo>
           </Link>
           <NavMenu className={clsx("hidden", "md:flex")}></NavMenu>
-          <RightMenu className={clsx("hidden", "md:flex")}></RightMenu>
-          <MobileMenu className={clsx("flex", "md:hidden")}></MobileMenu>
+          <RightMenu
+            className={clsx("hidden", "md:flex")}
+            onCartClick={onCartClick}
+            cartButtonRef={cartButtonRef}
+          ></RightMenu>
+          <MobileMenu
+            className={clsx("flex", "md:hidden")}
+            onCartClick={onCartClick}
+            cartButtonRef={cartButtonRef}
+          ></MobileMenu>
         </div>
       </div>
-      {/*Essa div serve apenas como elemento para preencher o espaço do fixed*/}
-      <div className={clsx("h-25", "-z-50")}></div>
     </div>
   );
 };

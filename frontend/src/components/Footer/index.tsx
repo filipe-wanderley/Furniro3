@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -12,7 +12,11 @@ const Footer = () => {
   };
 
   return (
-    <footer className={clsx("min-h-126.5 w-full px-4 pb-9.5 pt-12 font-poppins leading-normal lg:px-25")}>
+    <footer
+      className={clsx(
+        "min-h-126.5 w-full px-4 pb-9.5 pt-12 font-poppins leading-normal lg:px-25",
+      )}
+    >
       <div
         className={clsx(
           "grid gap-10 md:grid-cols-2 lg:grid-cols-[393px_177px_177px_minmax(0,1fr)]",
@@ -46,7 +50,7 @@ const Footer = () => {
             <Link to="/">Home</Link>
             <Link to="/shop">Shop</Link>
             <Link to="#">About</Link>
-            <Link to="#">Contact</Link>
+            <Link to="/contact">Contact</Link>
           </div>
         </div>
         <div>
@@ -90,7 +94,6 @@ const Footer = () => {
                 "min-w-0 max-w-full py-0.75 w-50",
                 "border-b border-b-black",
               )}
-              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             ></input>
