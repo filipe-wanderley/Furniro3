@@ -65,10 +65,17 @@ const Contact = () => {
               <input
                 {...register("name")}
                 aria-invalid={!!errors.name}
+                aria-describedby={
+                  errors.name ? "contact-name-error" : undefined
+                }
                 className="mt-2 w-full rounded border border-[#9F9F9F] px-4 py-3"
               />
               {errors.name && (
-                <span role="alert" className="mt-1 block text-sm text-red-700">
+                <span
+                  id="contact-name-error"
+                  role="alert"
+                  className="mt-1 block text-sm text-red-700"
+                >
                   {errors.name.message}
                 </span>
               )}
@@ -79,10 +86,17 @@ const Contact = () => {
                 {...register("email")}
                 type="email"
                 aria-invalid={!!errors.email}
+                aria-describedby={
+                  errors.email ? "contact-email-error" : undefined
+                }
                 className="mt-2 w-full rounded border border-[#9F9F9F] px-4 py-3"
               />
               {errors.email && (
-                <span role="alert" className="mt-1 block text-sm text-red-700">
+                <span
+                  id="contact-email-error"
+                  role="alert"
+                  className="mt-1 block text-sm text-red-700"
+                >
                   {errors.email.message}
                 </span>
               )}

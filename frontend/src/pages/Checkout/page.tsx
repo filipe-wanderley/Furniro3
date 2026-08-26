@@ -74,10 +74,17 @@ const Checkout = () => {
               <input
                 {...register("firstName")}
                 aria-invalid={!!errors.firstName}
+                aria-describedby={
+                  errors.firstName ? "checkout-first-name-error" : undefined
+                }
                 className={inputClass}
               />
               {errors.firstName && (
-                <span role="alert" className="mt-1 block text-sm text-red-700">
+                <span
+                  id="checkout-first-name-error"
+                  role="alert"
+                  className="mt-1 block text-sm text-red-700"
+                >
                   {errors.firstName.message}
                 </span>
               )}
@@ -87,10 +94,17 @@ const Checkout = () => {
               <input
                 {...register("lastName")}
                 aria-invalid={!!errors.lastName}
+                aria-describedby={
+                  errors.lastName ? "checkout-last-name-error" : undefined
+                }
                 className={inputClass}
               />
               {errors.lastName && (
-                <span role="alert" className="mt-1 block text-sm text-red-700">
+                <span
+                  id="checkout-last-name-error"
+                  role="alert"
+                  className="mt-1 block text-sm text-red-700"
+                >
                   {errors.lastName.message}
                 </span>
               )}
@@ -104,6 +118,9 @@ const Checkout = () => {
               <input
                 {...register("zipCode", { onBlur: handleCepBlur })}
                 aria-invalid={!!errors.zipCode}
+                aria-describedby={
+                  errors.zipCode ? "checkout-zip-error" : undefined
+                }
                 className={inputClass}
               />
               {cepLoading && (
@@ -112,7 +129,11 @@ const Checkout = () => {
                 </span>
               )}
               {errors.zipCode && (
-                <span role="alert" className="mt-1 block text-sm text-red-700">
+                <span
+                  id="checkout-zip-error"
+                  role="alert"
+                  className="mt-1 block text-sm text-red-700"
+                >
                   {errors.zipCode.message}
                 </span>
               )}
@@ -122,10 +143,17 @@ const Checkout = () => {
               <input
                 {...register("country")}
                 aria-invalid={!!errors.country}
+                aria-describedby={
+                  errors.country ? "checkout-country-error" : undefined
+                }
                 className={inputClass}
               />
               {errors.country && (
-                <span role="alert" className="mt-1 block text-sm text-red-700">
+                <span
+                  id="checkout-country-error"
+                  role="alert"
+                  className="mt-1 block text-sm text-red-700"
+                >
                   {errors.country.message}
                 </span>
               )}
@@ -135,10 +163,17 @@ const Checkout = () => {
               <input
                 {...register("streetAddress")}
                 aria-invalid={!!errors.streetAddress}
+                aria-describedby={
+                  errors.streetAddress ? "checkout-street-error" : undefined
+                }
                 className={inputClass}
               />
               {errors.streetAddress && (
-                <span role="alert" className="mt-1 block text-sm text-red-700">
+                <span
+                  id="checkout-street-error"
+                  role="alert"
+                  className="mt-1 block text-sm text-red-700"
+                >
                   {errors.streetAddress.message}
                 </span>
               )}
@@ -148,10 +183,17 @@ const Checkout = () => {
               <input
                 {...register("townCity")}
                 aria-invalid={!!errors.townCity}
+                aria-describedby={
+                  errors.townCity ? "checkout-town-error" : undefined
+                }
                 className={inputClass}
               />
               {errors.townCity && (
-                <span role="alert" className="mt-1 block text-sm text-red-700">
+                <span
+                  id="checkout-town-error"
+                  role="alert"
+                  className="mt-1 block text-sm text-red-700"
+                >
                   {errors.townCity.message}
                 </span>
               )}
@@ -161,10 +203,17 @@ const Checkout = () => {
               <input
                 {...register("province")}
                 aria-invalid={!!errors.province}
+                aria-describedby={
+                  errors.province ? "checkout-province-error" : undefined
+                }
                 className={inputClass}
               />
               {errors.province && (
-                <span role="alert" className="mt-1 block text-sm text-red-700">
+                <span
+                  id="checkout-province-error"
+                  role="alert"
+                  className="mt-1 block text-sm text-red-700"
+                >
                   {errors.province.message}
                 </span>
               )}
@@ -179,10 +228,17 @@ const Checkout = () => {
                 {...register("email")}
                 type="email"
                 aria-invalid={!!errors.email}
+                aria-describedby={
+                  errors.email ? "checkout-email-error" : undefined
+                }
                 className={inputClass}
               />
               {errors.email && (
-                <span role="alert" className="mt-1 block text-sm text-red-700">
+                <span
+                  id="checkout-email-error"
+                  role="alert"
+                  className="mt-1 block text-sm text-red-700"
+                >
                   {errors.email.message}
                 </span>
               )}
@@ -198,7 +254,14 @@ const Checkout = () => {
           <fieldset className="mt-8 space-y-4">
             <legend className="mb-3 font-semibold">Payment method</legend>
             <label className="flex items-center gap-3">
-              <input {...register("paymentMethod")} type="radio" value="bank" />{" "}
+              <input
+                {...register("paymentMethod")}
+                type="radio"
+                value="bank"
+                aria-describedby={
+                  errors.paymentMethod ? "checkout-payment-error" : undefined
+                }
+              />{" "}
               Direct Bank Transfer
             </label>
             <label className="flex items-center gap-3">
@@ -206,7 +269,11 @@ const Checkout = () => {
               Cash On Delivery
             </label>
             {errors.paymentMethod && (
-              <p role="alert" className="text-sm text-red-700">
+              <p
+                id="checkout-payment-error"
+                role="alert"
+                className="text-sm text-red-700"
+              >
                 {errors.paymentMethod.message}
               </p>
             )}

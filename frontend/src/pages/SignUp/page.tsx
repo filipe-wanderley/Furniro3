@@ -47,10 +47,16 @@ const SignUp = () => {
                 type="email"
                 autoComplete="email"
                 aria-invalid={!!errors.email}
+                aria-describedby={
+                  errors.email ? "signup-email-error" : undefined
+                }
                 className="mt-2 w-full border-b border-black bg-transparent px-1 py-3 outline-none"
               />
               {errors.email && (
-                <span className="mt-1 block text-sm text-red-700">
+                <span
+                  id="signup-email-error"
+                  className="mt-1 block text-sm text-red-700"
+                >
                   {errors.email.message}
                 </span>
               )}
@@ -62,10 +68,16 @@ const SignUp = () => {
                 type="password"
                 autoComplete="new-password"
                 aria-invalid={!!errors.password}
+                aria-describedby={
+                  errors.password ? "signup-password-error" : undefined
+                }
                 className="mt-2 w-full border-b border-black bg-transparent px-1 py-3 outline-none"
               />
               {errors.password && (
-                <span className="mt-1 block text-sm text-red-700">
+                <span
+                  id="signup-password-error"
+                  className="mt-1 block text-sm text-red-700"
+                >
                   {errors.password.message}
                 </span>
               )}
@@ -77,10 +89,18 @@ const SignUp = () => {
                 type="password"
                 autoComplete="new-password"
                 aria-invalid={!!errors.confirmPassword}
+                aria-describedby={
+                  errors.confirmPassword
+                    ? "signup-confirm-password-error"
+                    : undefined
+                }
                 className="mt-2 w-full border-b border-black bg-transparent px-1 py-3 outline-none"
               />
               {errors.confirmPassword && (
-                <span className="mt-1 block text-sm text-red-700">
+                <span
+                  id="signup-confirm-password-error"
+                  className="mt-1 block text-sm text-red-700"
+                >
                   {errors.confirmPassword.message}
                 </span>
               )}
@@ -91,6 +111,7 @@ const SignUp = () => {
               </p>
             )}
             <button
+              type="submit"
               disabled={isSubmitting}
               className="w-full bg-black px-6 py-4 font-medium text-white disabled:opacity-50"
             >
