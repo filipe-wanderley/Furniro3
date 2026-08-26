@@ -1,4 +1,4 @@
-import { useEffect, type RefObject } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 import { Link } from "react-router-dom";
 import { X, Trash2 } from "lucide-react";
 import { useCart } from "../../context/useCart";
@@ -22,6 +22,7 @@ const money = (value: number) =>
 
 const CartDrawer = ({ isOpen, onClose, cartButtonRef }: CartDrawerProps) => {
   const { items, removeItem } = useCart();
+  const drawerRef = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!isOpen) return;
     const previousOverflow = document.body.style.overflow;
@@ -36,7 +37,8 @@ const CartDrawer = ({ isOpen, onClose, cartButtonRef }: CartDrawerProps) => {
     };
   }, [isOpen, onClose]);
   useEffect(() => {
-    if (!isOpen) cartButtonRef.current?.focus();
+    if (isOpen) drawerRef.current?.focus();
+    else cartButtonRef.current?.focus();
   }, [cartButtonRef, isOpen]);
   if (!isOpen) return null;
   return (
@@ -52,6 +54,7 @@ const CartDrawer = ({ isOpen, onClose, cartButtonRef }: CartDrawerProps) => {
         role="dialog"
         aria-modal="true"
         aria-labelledby="cart-drawer-title"
+        ref={drawerRef}
         tabIndex={-1}
       >
         <header className="flex items-center justify-between border-b border-[#D9D9D9] pb-6">
@@ -124,6 +127,10 @@ const CartDrawer = ({ isOpen, onClose, cartButtonRef }: CartDrawerProps) => {
               to="/checkout"
               onClick={onClose}
               aria-disabled={items.length === 0}
+              tabIndex={items.length === 0 ? -1 : 0}
+              onKeyDown={(event) => {
+                if (items.length === 0) event.preventDefault();
+              }}
               className={`flex-1 rounded-full border border-black px-4 py-3 text-center ${items.length === 0 ? "pointer-events-none opacity-50" : ""}`}
             >
               Checkout
