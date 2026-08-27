@@ -12,9 +12,11 @@ type AuthStore = {
   token: string | null;
   user: AuthUser | null;
   isInitialized: boolean;
+  hasHydrated: boolean;
   setSession: (token: string, user: AuthUser) => void;
   clearSession: () => void;
   setInitialized: () => void;
+  setHydrated: () => void;
 };
 
 export const useAuthStore = create<AuthStore>()(
@@ -23,13 +25,18 @@ export const useAuthStore = create<AuthStore>()(
       token: null,
       user: null,
       isInitialized: false,
+      hasHydrated: false,
       setSession: (token, user) => set({ token, user, isInitialized: true }),
       clearSession: () => set({ token: null, user: null, isInitialized: true }),
       setInitialized: () => set({ isInitialized: true }),
+      setHydrated: () => set({ hasHydrated: true }),
     }),
     {
       name: "furniro-auth",
       partialize: (state) => ({ token: state.token, user: state.user }),
+      onRehydrateStorage: () => (state) => {
+        state?.setHydrated();
+      },
     },
   ),
 );

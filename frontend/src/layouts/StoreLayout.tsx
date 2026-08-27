@@ -8,12 +8,19 @@ import CartDrawer from "../components/CartDrawer";
 
 const StoreLayout = () => {
   const [isCartDrawerOpen, setCartDrawerOpen] = useState(false);
-  const { token, isInitialized, setInitialized, setSession, clearSession } =
-    useAuthStore();
+  const {
+    token,
+    isInitialized,
+    hasHydrated,
+    setInitialized,
+    setSession,
+    clearSession,
+  } = useAuthStore();
   const cartButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (isInitialized) return;
+    if (!hasHydrated) return;
     if (!token) {
       setInitialized();
       return;
@@ -21,7 +28,14 @@ const StoreLayout = () => {
     getMe()
       .then((user) => setSession(token, user))
       .catch(() => clearSession());
-  }, [clearSession, isInitialized, setInitialized, setSession, token]);
+  }, [
+    clearSession,
+    hasHydrated,
+    isInitialized,
+    setInitialized,
+    setSession,
+    token,
+  ]);
 
   return (
     <>
