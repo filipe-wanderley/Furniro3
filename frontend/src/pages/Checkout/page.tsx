@@ -1,7 +1,8 @@
 import { useState, type FocusEvent } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import BannerCard from "../../components/BannerCard";
 import BenefitsCard from "../../components/BenefitsCard";
 import { useCart } from "../../context/useCart";
@@ -21,7 +22,8 @@ const inputClass =
   "mt-[22px] h-[75px] w-full rounded-[10px] border border-[#9F9F9F] px-[30px] outline-none focus:border-[#B88E2F]";
 
 const Checkout = () => {
-  const { items } = useCart();
+  const { items, clearCart } = useCart();
+  const navigate = useNavigate();
   const [cepLoading, setCepLoading] = useState(false);
   const {
     register,
@@ -29,8 +31,10 @@ const Checkout = () => {
     setValue,
     setError,
     clearErrors,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<CheckoutForm>({ resolver: zodResolver(checkoutSchema) });
+  const paymentMethod = useWatch({ control, name: "paymentMethod" });
   const handleCepBlur = async (event: FocusEvent<HTMLInputElement>) => {
     const cep = event.target.value.replace(/\D/g, "");
     if (cep.length !== 8) return;
@@ -58,6 +62,8 @@ const Checkout = () => {
   };
   const onSubmit = async () => {
     toast.success("Order placed successfully.");
+    clearCart();
+    navigate("/");
   };
   return (
     <>
@@ -276,19 +282,19 @@ const Checkout = () => {
           </div>
           <fieldset className="mt-[22px] space-y-[11px] text-[16px]">
             <legend className="sr-only">Payment method</legend>
-            <label className="flex items-center gap-[15px]">
-              <input {...register("paymentMethod")} type="radio" value="bank" aria-describedby={errors.paymentMethod ? "checkout-payment-error" : undefined} className="accent-black" />
+            <label className="flex cursor-pointer items-center gap-[15px] text-black">
+              <input {...register("paymentMethod")} type="radio" value="bank" aria-describedby={errors.paymentMethod ? "checkout-payment-error" : undefined} className="cursor-pointer accent-black" />
               Direct Bank Transfer
             </label>
-            <p className="text-justify text-[16px] font-light leading-6 text-[#9F9F9F]">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
-            <label className="flex items-center gap-[15px] text-[#9F9F9F]">
-              <input {...register("paymentMethod")} type="radio" value="cash" className="accent-black" />
+            <p className={`text-justify text-[16px] font-light leading-6 transition-colors ${paymentMethod === "bank" ? "text-black" : "text-[#9F9F9F]"}`}>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
+            <label className="flex cursor-pointer items-center gap-[15px] text-black">
+              <input {...register("paymentMethod")} type="radio" value="cash" className="cursor-pointer accent-black" />
               Cash On Delivery
             </label>
             {errors.paymentMethod && <p id="checkout-payment-error" role="alert" className="text-sm text-red-700">{errors.paymentMethod.message}</p>}
           </fieldset>
-          <p className="mt-[22px] text-justify text-[16px] font-light leading-6">Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <strong>privacy policy.</strong></p>
-          <button type="submit" form="checkout-form" disabled={isSubmitting} className="mx-auto mt-[39px] block h-[64px] w-[318px] max-w-full rounded-[15px] border border-black text-[20px] disabled:opacity-50">{isSubmitting ? "PLACING ORDER..." : "Place order"}</button>
+          <p className={`mt-[22px] text-justify text-[16px] font-light leading-6 transition-colors ${paymentMethod === "cash" ? "text-black" : "text-[#9F9F9F]"}`}>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <strong>privacy policy.</strong></p>
+          <button type="submit" form="checkout-form" disabled={isSubmitting} className="mx-auto mt-[39px] block h-[64px] w-[318px] max-w-full cursor-pointer rounded-[15px] border border-black bg-white text-[20px] transition hover:scale-105 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100">{isSubmitting ? "PLACING ORDER..." : "Place order"}</button>
         </aside>
       </main>
       <BenefitsCard />
