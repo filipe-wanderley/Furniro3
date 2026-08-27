@@ -11,8 +11,7 @@ type HeaderProps = {
 };
 const Header = ({ onCartClick, cartButtonRef }: HeaderProps) => {
   return (
-    <div>
-      <div
+      <header
         className={clsx(
           "flex justify-center items-center",
           "h-25 w-full max-w-360",
@@ -43,8 +42,7 @@ const Header = ({ onCartClick, cartButtonRef }: HeaderProps) => {
             cartButtonRef={cartButtonRef}
           ></MobileMenu>
         </div>
-      </div>
-    </div>
+      </header>
   );
 };
 export default Header;

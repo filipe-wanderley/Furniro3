@@ -18,7 +18,7 @@ const money = (value: number) =>
     maximumFractionDigits: 2,
   }).format(value);
 const inputClass =
-  "mt-2 w-full rounded border border-[#9F9F9F] px-4 py-3 outline-none focus:border-[#B88E2F]";
+  "mt-[22px] h-[75px] w-full rounded-[10px] border border-[#9F9F9F] px-[30px] outline-none focus:border-[#B88E2F]";
 
 const Checkout = () => {
   const { items } = useCart();
@@ -56,7 +56,7 @@ const Checkout = () => {
       setCepLoading(false);
     }
   };
-  const onSubmit = async (_data: CheckoutForm) => {
+  const onSubmit = async () => {
     toast.success("Order placed successfully.");
   };
   return (
@@ -65,10 +65,10 @@ const Checkout = () => {
         title="Checkout"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Checkout" }]}
       />
-      <main className="mx-auto grid max-w-[1240px] gap-12 px-6 py-12 lg:grid-cols-2 lg:py-20">
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <h1 className="mb-8 text-3xl font-semibold">Billing details</h1>
-          <div className="grid gap-5 sm:grid-cols-2">
+      <main className="mx-auto grid max-w-[1242px] gap-[26px] px-6 py-[63px] font-poppins lg:grid-cols-2">
+        <form id="checkout-form" onSubmit={handleSubmit(onSubmit)} noValidate className="px-0 pb-[71px] pt-[35px] lg:px-[74px]">
+          <h1 className="mb-[29px] text-[36px] font-semibold leading-[54px]">Billing details</h1>
+          <div className="grid gap-x-[30px] gap-y-[31px] sm:grid-cols-2">
             <label>
               First Name
               <input
@@ -113,7 +113,7 @@ const Checkout = () => {
               Company Name (optional)
               <input {...register("companyName")} className={inputClass} />
             </label>
-            <label>
+            <label className="sm:col-span-2">
               ZIP code
               <input
                 {...register("zipCode", { onBlur: handleCepBlur })}
@@ -138,7 +138,7 @@ const Checkout = () => {
                 </span>
               )}
             </label>
-            <label>
+            <label className="sm:col-span-2">
               Country / Region
               <input
                 {...register("country")}
@@ -178,7 +178,7 @@ const Checkout = () => {
                 </span>
               )}
             </label>
-            <label>
+            <label className="sm:col-span-2">
               Town / City
               <input
                 {...register("townCity")}
@@ -198,7 +198,7 @@ const Checkout = () => {
                 </span>
               )}
             </label>
-            <label>
+            <label className="sm:col-span-2">
               Province
               <input
                 {...register("province")}
@@ -251,59 +251,43 @@ const Checkout = () => {
               className={`${inputClass} min-h-28 resize-y`}
             />
           </label>
-          <fieldset className="mt-8 space-y-4">
-            <legend className="mb-3 font-semibold">Payment method</legend>
-            <label className="flex items-center gap-3">
-              <input
-                {...register("paymentMethod")}
-                type="radio"
-                value="bank"
-                aria-describedby={
-                  errors.paymentMethod ? "checkout-payment-error" : undefined
-                }
-              />{" "}
-              Direct Bank Transfer
-            </label>
-            <label className="flex items-center gap-3">
-              <input {...register("paymentMethod")} type="radio" value="cash" />{" "}
-              Cash On Delivery
-            </label>
-            {errors.paymentMethod && (
-              <p
-                id="checkout-payment-error"
-                role="alert"
-                className="text-sm text-red-700"
-              >
-                {errors.paymentMethod.message}
-              </p>
-            )}
-          </fieldset>
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="mt-8 w-full rounded border border-black px-6 py-4 font-medium disabled:opacity-50"
-          >
-            {isSubmitting ? "PLACING ORDER..." : "Place order"}
-          </button>
         </form>
-        <aside className="h-fit bg-[#F9F1E7] p-8">
-          <h2 className="mb-8 text-2xl font-semibold">Your order</h2>
+        <aside className="h-fit px-0 pb-[86px] pt-[87px] lg:px-[38px]">
+          <div className="mb-[25px] flex justify-between text-[24px] font-medium leading-9"><h2>Product</h2><h2>Subtotal</h2></div>
           <div className="space-y-5">
             {items.map((item) => (
-              <div key={item.id} className="flex justify-between gap-4 text-sm">
-                <span>
-                  {item.name} x {item.quantity}
+              <div key={item.id} className="flex justify-between gap-4 text-[16px]">
+                <span className="text-[#9F9F9F]">
+                  {item.name} <b className="ml-2 font-medium text-black">&times; &nbsp; {item.quantity}</b>
                 </span>
                 <span>Rs. {money(getCartItemSubtotal(item))}</span>
               </div>
             ))}
           </div>
-          <div className="mt-8 flex justify-between border-t border-black/20 pt-5">
-            <strong>Total</strong>
-            <strong className="text-xl text-[#B88E2F]">
+          <div className="mt-[22px] flex justify-between text-[16px]">
+            <span>Subtotal</span><span>Rs. {money(getCartSubtotal(items))}</span>
+          </div>
+          <div className="mt-[16px] flex justify-between border-b border-[#D9D9D9] pb-[33px] text-[16px]">
+            <span>Total</span>
+            <strong className="text-[24px] text-[#B88E2F]">
               Rs. {money(getCartSubtotal(items))}
             </strong>
           </div>
+          <fieldset className="mt-[22px] space-y-[11px] text-[16px]">
+            <legend className="sr-only">Payment method</legend>
+            <label className="flex items-center gap-[15px]">
+              <input {...register("paymentMethod")} type="radio" value="bank" aria-describedby={errors.paymentMethod ? "checkout-payment-error" : undefined} className="accent-black" />
+              Direct Bank Transfer
+            </label>
+            <p className="text-justify text-[16px] font-light leading-6 text-[#9F9F9F]">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
+            <label className="flex items-center gap-[15px] text-[#9F9F9F]">
+              <input {...register("paymentMethod")} type="radio" value="cash" className="accent-black" />
+              Cash On Delivery
+            </label>
+            {errors.paymentMethod && <p id="checkout-payment-error" role="alert" className="text-sm text-red-700">{errors.paymentMethod.message}</p>}
+          </fieldset>
+          <p className="mt-[22px] text-justify text-[16px] font-light leading-6">Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <strong>privacy policy.</strong></p>
+          <button type="submit" form="checkout-form" disabled={isSubmitting} className="mx-auto mt-[39px] block h-[64px] w-[318px] max-w-full rounded-[15px] border border-black text-[20px] disabled:opacity-50">{isSubmitting ? "PLACING ORDER..." : "Place order"}</button>
         </aside>
       </main>
       <BenefitsCard />

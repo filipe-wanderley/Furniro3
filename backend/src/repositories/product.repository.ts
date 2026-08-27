@@ -1,4 +1,3 @@
-// src/repositories/product.repository.ts
 import type { Product } from '@prisma/client'
 
 export type ProductFilters = {

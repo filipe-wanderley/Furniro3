@@ -74,7 +74,6 @@ const OurProductsCard = ({produto}:OurProductsCardProp) => {
           </p>
         )}
       </div>
-      {/*Hover*/}
       <div
         className={clsx(
           "flex flex-col justify-center items-center gap-6",

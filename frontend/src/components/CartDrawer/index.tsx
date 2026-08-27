@@ -1,12 +1,8 @@
 import { useEffect, useRef, type RefObject } from "react";
 import { Link } from "react-router-dom";
-import { X, Trash2 } from "lucide-react";
+import { CircleX, ShoppingBag } from "lucide-react";
 import { useCart } from "../../context/useCart";
-import {
-  getCartItemSubtotal,
-  getCartSubtotal,
-  getCartItemUnitPrice,
-} from "../../utils/cartPrice";
+import { getCartSubtotal, getCartItemUnitPrice } from "../../utils/cartPrice";
 
 type CartDrawerProps = {
   isOpen: boolean;
@@ -50,15 +46,15 @@ const CartDrawer = ({ isOpen, onClose, cartButtonRef }: CartDrawerProps) => {
       }}
     >
       <aside
-        className="flex h-full max-h-screen w-[min(417px,100vw)] flex-col bg-white p-6 shadow-xl"
+        className="flex h-full max-h-screen w-[min(417px,100vw)] flex-col bg-white px-[30px] pb-[28px] pt-[26px] shadow-xl"
         role="dialog"
         aria-modal="true"
         aria-labelledby="cart-drawer-title"
         ref={drawerRef}
         tabIndex={-1}
       >
-        <header className="flex items-center justify-between border-b border-[#D9D9D9] pb-6">
-          <h2 id="cart-drawer-title" className="text-2xl font-semibold">
+        <header className="flex items-center justify-between border-b border-[#D9D9D9] pb-[26px]">
+          <h2 id="cart-drawer-title" className="text-[24px] font-semibold leading-9">
             Shopping Cart
           </h2>
           <button
@@ -67,17 +63,17 @@ const CartDrawer = ({ isOpen, onClose, cartButtonRef }: CartDrawerProps) => {
             onClick={onClose}
             className="p-2"
           >
-            <X size={22} />
+            <ShoppingBag size={20} strokeWidth={1.5} />
           </button>
         </header>
-        <div className="min-h-0 flex-1 space-y-5 overflow-y-auto py-6">
+        <div className="min-h-0 flex-1 space-y-[20px] overflow-y-auto py-[40px]">
           {items.length === 0 ? (
             <p className="py-10 text-center text-[#9F9F9F]">
               Your cart is empty.
             </p>
           ) : (
             items.map((item) => (
-              <div key={item.id} className="flex gap-4">
+              <div key={item.id} className="flex items-center gap-[32px]">
                 <img
                   src={
                     item.image.startsWith("http")
@@ -85,31 +81,28 @@ const CartDrawer = ({ isOpen, onClose, cartButtonRef }: CartDrawerProps) => {
                       : `${import.meta.env.VITE_API_URL ?? "http://localhost:3000"}${item.image}`
                   }
                   alt={item.name}
-                  className="h-20 w-20 rounded-lg bg-[#F9F1E7] object-contain"
+                  className="h-[105px] w-[108px] shrink-0 rounded-[10px] bg-[#F9F1E7] object-contain"
                 />
                 <div className="min-w-0 flex-1">
-                  <p className="truncate font-medium">{item.name}</p>
-                  <p className="text-sm text-[#9F9F9F]">
-                    {item.quantity} x Rs. {money(getCartItemUnitPrice(item))}
-                  </p>
-                  <p className="text-sm font-medium">
-                    Rs. {money(getCartItemSubtotal(item))}
+                  <p className="truncate text-[16px] font-normal">{item.name}</p>
+                  <p className="mt-[11px] whitespace-nowrap text-[12px]">
+                    {item.quantity} <span className="mx-[12px]">×</span> <span className="text-[#B88E2F]">Rs. {money(getCartItemUnitPrice(item))}</span>
                   </p>
                 </div>
                 <button
                   type="button"
                   aria-label={`Remove ${item.name}`}
                   onClick={() => removeItem(item.id)}
-                  className="self-center p-2 text-[#B88E2F]"
+                  className="ml-auto self-center p-1 text-[#9F9F9F]"
                 >
-                  <Trash2 size={18} />
+                  <CircleX size={20} fill="#9F9F9F" color="white" />
                 </button>
               </div>
             ))
           )}
         </div>
-        <footer className="border-t border-[#D9D9D9] pt-5">
-          <div className="mb-6 flex justify-between">
+        <footer className="border-t border-[#D9D9D9] pt-[22px]">
+          <div className="mb-[23px] flex justify-between text-[16px]">
             <span>Subtotal</span>
             <strong className="text-[#B88E2F]">
               Rs. {money(getCartSubtotal(items))}
@@ -119,7 +112,7 @@ const CartDrawer = ({ isOpen, onClose, cartButtonRef }: CartDrawerProps) => {
             <Link
               to="/cart"
               onClick={onClose}
-              className="flex-1 rounded-full border border-black px-4 py-3 text-center"
+              className="h-[30px] flex-1 rounded-full border border-black px-4 text-center text-[12px] leading-[28px]"
             >
               Cart
             </Link>
@@ -131,7 +124,7 @@ const CartDrawer = ({ isOpen, onClose, cartButtonRef }: CartDrawerProps) => {
               onKeyDown={(event) => {
                 if (items.length === 0) event.preventDefault();
               }}
-              className={`flex-1 rounded-full border border-black px-4 py-3 text-center ${items.length === 0 ? "pointer-events-none opacity-50" : ""}`}
+              className={`h-[30px] flex-1 rounded-full border border-black px-4 text-center text-[12px] leading-[28px] ${items.length === 0 ? "pointer-events-none opacity-50" : ""}`}
             >
               Checkout
             </Link>

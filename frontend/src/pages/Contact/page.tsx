@@ -4,6 +4,10 @@ import toast from "react-hot-toast";
 import BannerCard from "../../components/BannerCard";
 import BenefitsCard from "../../components/BenefitsCard";
 import { contactSchema, type ContactForm } from "../../schemas/contact.schema";
+import { Clock3, MapPin, Phone } from "lucide-react";
+
+const contactInputClass =
+  "mt-[22px] h-[75px] w-full rounded-[10px] border border-[#9F9F9F] px-[30px] outline-none focus:border-[#B88E2F]";
 
 const Contact = () => {
   const {
@@ -11,7 +15,7 @@ const Contact = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<ContactForm>({ resolver: zodResolver(contactSchema) });
-  const onSubmit = async (_data: ContactForm) => {
+  const onSubmit = async () => {
     toast.success("Your message has been sent.");
   };
   return (
@@ -20,45 +24,48 @@ const Contact = () => {
         title="Contact"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Contact" }]}
       />
-      <main className="mx-auto max-w-[1240px] px-6 py-12 lg:py-20">
-        <div className="mb-12 text-center">
-          <h1 className="text-3xl font-semibold">Get In Touch With Us</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-[#9F9F9F]">
-            For more information about our products and services, please feel
-            free to drop us an email.
+      <main className="mx-auto max-w-[1058px] px-6 pb-[63px] pt-[98px] font-poppins">
+        <div className="mb-[64px] text-center">
+          <h1 className="text-[36px] font-semibold leading-[54px]">Get In Touch With Us</h1>
+          <p className="mx-auto max-w-[644px] text-[16px] leading-6 text-[#9F9F9F]">
+            For More Information About Our Product &amp; Services. Please Feel Free To Drop Us An Email. Our Staff Always Be There To Help You Out. Do Not Hesitate!
           </p>
         </div>
-        <div className="grid gap-14 lg:grid-cols-[minmax(240px,1fr)_minmax(320px,1.2fr)]">
-          <section className="space-y-8">
-            <div>
-              <h2 className="font-semibold">Address</h2>
-              <p className="mt-2 text-[#666]">
-                400 University Drive Suite 200
-                <br />
-                Coral Gables, FL 33134 USA
+        <div className="grid gap-14 lg:grid-cols-[393px_1fr] lg:gap-[30px]">
+          <section className="space-y-[43px] px-4 pt-[49px] lg:px-[46px]">
+            <div className="flex items-start gap-[30px]">
+              <MapPin className="mt-1 size-[30px] shrink-0" fill="currentColor" />
+              <div><h2 className="text-[24px] font-medium leading-9">Address</h2>
+              <p className="max-w-[212px] text-[16px] leading-6">
+                236 5th SE Avenue, New York NY10000, United States
               </p>
+              </div>
             </div>
-            <div>
-              <h2 className="font-semibold">Phone</h2>
-              <p className="mt-2 text-[#666]">
-                Mobile: (+84) 546-6789
+            <div className="flex items-start gap-[30px]">
+              <Phone className="mt-1 size-[30px] shrink-0" fill="currentColor" />
+              <div><h2 className="text-[24px] font-medium leading-9">Phone</h2>
+              <p className="max-w-[212px] text-[16px] leading-6">
+                Mobile: +(84) 546-6789
                 <br />
-                Hotline: (+84) 456-6789
+                Hotline: +(84) 456-6789
               </p>
+              </div>
             </div>
-            <div>
-              <h2 className="font-semibold">Working Time</h2>
-              <p className="mt-2 text-[#666]">
+            <div className="flex items-start gap-[30px]">
+              <Clock3 className="mt-1 size-[30px] shrink-0" fill="currentColor" />
+              <div><h2 className="text-[24px] font-medium leading-9">Working Time</h2>
+              <p className="max-w-[212px] text-[16px] leading-6">
                 Monday-Friday: 9:00 - 22:00
                 <br />
                 Saturday-Sunday: 9:00 - 21:00
               </p>
+              </div>
             </div>
           </section>
           <form
             onSubmit={handleSubmit(onSubmit)}
             noValidate
-            className="space-y-5"
+            className="space-y-[32px] px-0 lg:px-[52px] lg:pt-[49px]"
           >
             <label className="block">
               Your name
@@ -68,7 +75,8 @@ const Contact = () => {
                 aria-describedby={
                   errors.name ? "contact-name-error" : undefined
                 }
-                className="mt-2 w-full rounded border border-[#9F9F9F] px-4 py-3"
+                placeholder="Abc"
+                className={contactInputClass}
               />
               {errors.name && (
                 <span
@@ -89,7 +97,8 @@ const Contact = () => {
                 aria-describedby={
                   errors.email ? "contact-email-error" : undefined
                 }
-                className="mt-2 w-full rounded border border-[#9F9F9F] px-4 py-3"
+                placeholder="Abc@def.com"
+                className={contactInputClass}
               />
               {errors.email && (
                 <span
@@ -105,20 +114,22 @@ const Contact = () => {
               Subject
               <input
                 {...register("subject")}
-                className="mt-2 w-full rounded border border-[#9F9F9F] px-4 py-3"
+                placeholder="This is an optional"
+                className={contactInputClass}
               />
             </label>
             <label className="block">
               Message
               <textarea
                 {...register("message")}
-                className="mt-2 min-h-32 w-full resize-y rounded border border-[#9F9F9F] px-4 py-3"
+                placeholder="Hi! I’d like to ask about"
+                className="mt-[22px] min-h-[120px] w-full resize-y rounded-[10px] border border-[#9F9F9F] px-[30px] py-[26px] outline-none focus:border-[#B88E2F]"
               />
             </label>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="rounded border border-black px-10 py-4 font-medium disabled:opacity-50"
+              className="h-[55px] w-[237px] rounded-[5px] bg-[#B88E2F] text-white disabled:opacity-50"
             >
               Submit
             </button>

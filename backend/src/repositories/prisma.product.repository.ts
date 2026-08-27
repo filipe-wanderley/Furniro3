@@ -1,4 +1,3 @@
-// src/repositories/product.repository.ts
 import type { PrismaClient } from '@prisma/client'
 import type { ProductRepository } from './product.repository.js'
 

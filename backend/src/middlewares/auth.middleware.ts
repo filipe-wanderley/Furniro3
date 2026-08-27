@@ -28,7 +28,6 @@ export const authMiddleware = (
     req.userId = payload.sub;
     next();
   } catch {
-    next(new BadRequestException("Invalid or expired token"));
     next(new UnauthorizedException("Invalid or expired token"));
   }
 };

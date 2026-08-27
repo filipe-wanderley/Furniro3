@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { isAxiosError } from "axios";
-import Logo from "../../components/Logo";
 import { signupSchema, type SignUpForm } from "../../schemas/signup.schema";
 import { register as registerUser } from "../../services/auth.service";
 
@@ -28,20 +27,24 @@ const SignUp = () => {
     }
   };
   return (
-    <main className="grid min-h-screen bg-[#FFF3E3] lg:grid-cols-2">
-      <section className="order-2 flex items-center justify-center px-6 py-12 lg:order-1">
-        <div className="w-full max-w-md">
-          <Link to="/" className="mb-12 inline-flex">
-            <Logo />
+    <main className="grid min-h-screen bg-white font-poppins lg:grid-cols-2">
+      <div
+        className="min-h-[260px] bg-cover bg-center lg:min-h-screen"
+        style={{ backgroundImage: "url('/Images/Hero.jpg')" }}
+      />
+      <section className="flex items-center justify-center px-6 py-10 lg:items-start lg:py-0">
+        <div className="w-full max-w-[490px]">
+          <Link to="/" className="mx-auto mb-[50px] flex h-[148px] w-[232px] items-center justify-center lg:mt-[24px]">
+            <img src="/Logo/Logo.svg" alt="Furniro" className="h-full w-full object-contain" />
           </Link>
-          <h1 className="mb-8 text-4xl font-semibold">Sign up</h1>
+          <h1 className="mb-[179px] text-center text-[40px] font-semibold leading-none">Sign up</h1>
           <form
             onSubmit={handleSubmit(onSubmit)}
             noValidate
-            className="space-y-5"
+            className="space-y-[48px]"
           >
             <label className="block">
-              Email
+              <span className="sr-only">Email</span>
               <input
                 {...register("email")}
                 type="email"
@@ -50,7 +53,8 @@ const SignUp = () => {
                 aria-describedby={
                   errors.email ? "signup-email-error" : undefined
                 }
-                className="mt-2 w-full border-b border-black bg-transparent px-1 py-3 outline-none"
+                placeholder="email"
+                className="h-[43px] w-full border-0 bg-[#D9D9D9] px-[10px] text-[16px] font-semibold outline-none placeholder:text-black"
               />
               {errors.email && (
                 <span
@@ -62,7 +66,7 @@ const SignUp = () => {
               )}
             </label>
             <label className="block">
-              Password
+              <span className="sr-only">Password</span>
               <input
                 {...register("password")}
                 type="password"
@@ -71,7 +75,8 @@ const SignUp = () => {
                 aria-describedby={
                   errors.password ? "signup-password-error" : undefined
                 }
-                className="mt-2 w-full border-b border-black bg-transparent px-1 py-3 outline-none"
+                placeholder="password"
+                className="h-[43px] w-full border-0 bg-[#D9D9D9] px-[10px] text-[16px] font-semibold outline-none placeholder:text-black"
               />
               {errors.password && (
                 <span
@@ -83,7 +88,7 @@ const SignUp = () => {
               )}
             </label>
             <label className="block">
-              Confirm password
+              <span className="sr-only">Confirm password</span>
               <input
                 {...register("confirmPassword")}
                 type="password"
@@ -94,7 +99,8 @@ const SignUp = () => {
                     ? "signup-confirm-password-error"
                     : undefined
                 }
-                className="mt-2 w-full border-b border-black bg-transparent px-1 py-3 outline-none"
+                placeholder="confirm password"
+                className="h-[43px] w-full border-0 bg-[#D9D9D9] px-[10px] text-[16px] font-semibold outline-none placeholder:text-black"
               />
               {errors.confirmPassword && (
                 <span
@@ -113,23 +119,13 @@ const SignUp = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-black px-6 py-4 font-medium text-white disabled:opacity-50"
+              className="mx-auto mt-[87px] block h-[32px] w-[328px] max-w-full bg-black px-6 text-[16px] font-medium text-white disabled:opacity-50"
             >
               {isSubmitting ? "LOADING..." : "SIGN UP"}
             </button>
           </form>
-          <p className="mt-6 text-sm">
-            Already registered?{" "}
-            <Link to="/login" className="font-semibold underline">
-              Login
-            </Link>
-          </p>
         </div>
       </section>
-      <div
-        className="order-1 min-h-[260px] bg-cover bg-center lg:order-2 lg:min-h-screen"
-        style={{ backgroundImage: "url('/Images/Hero.jpg')" }}
-      />
     </main>
   );
 };

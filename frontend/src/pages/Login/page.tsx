@@ -2,7 +2,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { isAxiosError } from "axios";
-import Logo from "../../components/Logo";
 import { loginSchema, type LoginForm } from "../../schemas/login.schema";
 import { login } from "../../services/auth.service";
 import { useAuthStore } from "../../context/authStore";
@@ -26,31 +25,32 @@ const Login = () => {
     } catch (error) {
       setError("root", {
         message:
-          isAxiosError(error) && error.response?.status === 400
+          isAxiosError(error) &&
+          [400, 401].includes(error.response?.status ?? 0)
             ? "Invalid email or password."
             : "Unable to sign in. Try again.",
       });
     }
   };
   return (
-    <main className="grid min-h-screen bg-[#FFF3E3] lg:grid-cols-2">
+    <main className="grid min-h-screen bg-white font-poppins lg:grid-cols-2">
       <div
         className="hidden min-h-screen bg-cover bg-center lg:block"
         style={{ backgroundImage: "url('/Images/Hero.jpg')" }}
       />
-      <section className="flex items-center justify-center px-6 py-12">
-        <div className="w-full max-w-md">
-          <Link to="/" className="mb-12 inline-flex">
-            <Logo />
+      <section className="flex items-center justify-center px-6 py-12 lg:items-start lg:py-0">
+        <div className="w-full max-w-[490px]">
+          <Link to="/" className="mx-auto mb-[35px] flex h-[148px] w-[232px] items-center justify-center lg:mt-[222px]">
+            <img src="/Logo/Logo.svg" alt="Furniro" className="h-full w-full object-contain" />
           </Link>
-          <h1 className="mb-8 text-4xl font-semibold">Login</h1>
+          <h1 className="mb-[35px] text-center text-[40px] font-semibold leading-none">Login</h1>
           <form
             onSubmit={handleSubmit(onSubmit)}
             noValidate
-            className="space-y-5"
+            className="space-y-[39px]"
           >
             <label className="block">
-              Email
+              <span className="sr-only">Email</span>
               <input
                 {...register("email")}
                 type="email"
@@ -59,7 +59,8 @@ const Login = () => {
                 aria-describedby={
                   errors.email ? "login-email-error" : undefined
                 }
-                className="mt-2 w-full border-b border-black bg-transparent px-1 py-3 outline-none"
+                placeholder="email"
+                className="h-[43px] w-full border-0 bg-[#D9D9D9] px-[10px] text-[16px] font-semibold outline-none placeholder:text-black"
               />
               {errors.email && (
                 <span
@@ -71,7 +72,7 @@ const Login = () => {
               )}
             </label>
             <label className="block">
-              Password
+              <span className="sr-only">Password</span>
               <input
                 {...register("password")}
                 type="password"
@@ -80,7 +81,8 @@ const Login = () => {
                 aria-describedby={
                   errors.password ? "login-password-error" : undefined
                 }
-                className="mt-2 w-full border-b border-black bg-transparent px-1 py-3 outline-none"
+                placeholder="password"
+                className="h-[43px] w-full border-0 bg-[#D9D9D9] px-[10px] text-[16px] font-semibold outline-none placeholder:text-black"
               />
               {errors.password && (
                 <span
@@ -99,14 +101,14 @@ const Login = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-black px-6 py-4 font-medium text-white disabled:opacity-50"
+              className="mx-auto !mt-[50px] block h-[32px] w-[328px] max-w-full bg-black px-6 text-[16px] font-medium text-white disabled:opacity-50"
             >
               {isSubmitting ? "LOADING..." : "LOGIN"}
             </button>
           </form>
-          <p className="mt-6 text-sm">
+          <p className="mt-[29px] text-center text-[16px]">
             Not registered yet?{" "}
-            <Link to="/signup" className="font-semibold underline">
+            <Link to="/signup" className="ml-[14px] font-semibold">
               Sign up
             </Link>
           </p>
