@@ -15,13 +15,13 @@ const Categories = () => {
                 )}>
                 <h1
                     className={clsx(
-                        "text-primary-text text-[32px] font-poppins font-bold text-center",
+                        "text-primary-text text-[28px] font-poppins font-bold text-center sm:text-[32px]",
                     )}>
                     Browse The Range
                 </h1>
                 <p
                     className={clsx(
-                        "text-primary-text-100 text-[20px] font-poppins text-center",
+                        "text-primary-text-100 text-[16px] font-poppins text-center sm:text-[20px]",
                     )}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </p>

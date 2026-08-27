@@ -71,9 +71,9 @@ const SingleProductCard = ({ produto }: SingleProductCardProps) => {
       100;
 
   return (
-    <div className={clsx("font-poppins", "max-w-150 md:w-full")}>
-      <h1 className={clsx("text-[42px]")}>{produto.name}</h1>
-      <div className={clsx("flex gap-6 items-end", "text-[#9f9f9f] ")}>
+    <div className={clsx("w-full min-w-0 max-w-150 font-poppins")}>
+      <h1 className={clsx("break-words text-[32px] leading-tight sm:text-[42px]")}>{produto.name}</h1>
+      <div className={clsx("flex flex-wrap gap-x-6 gap-y-1 items-end", "text-[#9f9f9f] ")}>
         <h1 className={clsx("text-[24px]")}>
           Rs.{" "}
           {produto.discountPrice
@@ -95,7 +95,7 @@ const SingleProductCard = ({ produto }: SingleProductCardProps) => {
         rating={produto.rating}
         reviewCount={produto.reviewCount}
       ></StarCount>
-      <p className={clsx("max-w-106 text-[13px] mb-5.5")}>
+      <p className={clsx("max-w-106 break-words text-[13px] mb-5.5")}>
         {produto.shortDescription}
       </p>
       <SingleProductSize

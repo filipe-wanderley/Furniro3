@@ -40,10 +40,10 @@ const Login = () => {
       />
       <section className="flex items-center justify-center px-6 py-12 lg:items-start lg:py-0">
         <div className="w-full max-w-[490px]">
-          <Link to="/" className="mx-auto mb-[35px] flex h-[148px] w-[232px] items-center justify-center lg:mt-[222px]">
+          <Link to="/" className="mx-auto mb-8 flex h-[120px] w-[188px] items-center justify-center sm:h-[148px] sm:w-[232px] lg:mb-[35px] lg:mt-[222px]">
             <img src="/Logo/Logo.svg" alt="Furniro" className="h-full w-full object-contain" />
           </Link>
-          <h1 className="mb-[35px] text-center text-[40px] font-semibold leading-none">Login</h1>
+          <h1 className="mb-[35px] text-center text-[36px] font-semibold leading-none sm:text-[40px]">Login</h1>
           <form
             onSubmit={handleSubmit(onSubmit)}
             noValidate

@@ -25,7 +25,7 @@ const OurProducts = ({ title, font }: OurProductsProps) => {
     <div className={clsx("w-full", "flex flex-col items-center", "px-4 pb-17.25")}>
       <h1
         className={clsx(
-          "text-primary-text-200 text-[40px] font-poppins leading-12",
+          "text-center text-primary-text-200 text-[32px] font-poppins leading-10 sm:text-[40px] sm:leading-12",
           "mb-8",
           { font }
         )}

@@ -14,7 +14,7 @@ const Header = ({ onCartClick, cartButtonRef }: HeaderProps) => {
       <header
         className={clsx(
           "flex justify-center items-center",
-          "h-25 w-full max-w-360",
+          "h-25 w-full",
           "sticky top-0 z-50",
           "bg-primary",
         )}
@@ -22,7 +22,7 @@ const Header = ({ onCartClick, cartButtonRef }: HeaderProps) => {
         <div
           className={clsx(
             "flex justify-between items-center",
-            "w-full px-2 max-h-10.25",
+            "mx-auto w-full max-w-360 px-2 max-h-10.25",
             "md:px-4",
             "lg:px-12.5",
           )}

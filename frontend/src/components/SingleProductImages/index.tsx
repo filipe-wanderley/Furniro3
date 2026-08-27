@@ -13,10 +13,10 @@ const SingleProductImages = ({ images }: SingleProductImagesProps) => {
     setSelectedIndex(index);
   };
   return (
-    <div className={clsx("flex gap-7 flex-col-reverse min-w-0", "md:flex-row", "max-sm: items-start")}>
-      <div className={clsx("max-sm:w-[90%] max-sm:overflow-x-scroll")}>
+    <div className={clsx("flex w-full min-w-0 flex-col-reverse items-center gap-7", "md:w-auto md:flex-row md:items-start")}>
+      <div className={clsx("w-full overflow-x-auto md:w-auto")}>
         <div
-          className={clsx("flex gap-6.75","md:flex-col max-md:justify-center", "max-sm:min-w-100")}
+          className={clsx("flex min-w-max justify-center gap-6.75 md:min-w-0 md:flex-col")}
         >
           {images.map((image, index) => (
             <img
@@ -34,7 +34,7 @@ const SingleProductImages = ({ images }: SingleProductImagesProps) => {
         </div>
       </div>
 
-      <div className={clsx("h-125 max-w-105.75 w-[90%]", "overflow-hidden", "bg-[#F9F1E7]", "rounded-[10px]")}>
+      <div className={clsx("aspect-square w-full max-w-105.75 md:h-125 md:aspect-auto", "overflow-hidden", "bg-[#F9F1E7]", "rounded-[10px]")}>
         <img
           src={currentImage}
           className={clsx("h-full w-full", "hover:scale-110 transition")}

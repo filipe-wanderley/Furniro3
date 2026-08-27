@@ -9,8 +9,8 @@ interface MenuSingleProductProps {
 
 const MenuSingleProduct = ({ productName }: MenuSingleProductProps) => {
     return(
-        <div className={clsx(" pl-24")}>
-            <ul className={clsx("flex flex-row items-center gap-2.5 md:gap-3.75")}>
+        <div className={clsx("w-full min-w-0 px-2 md:pl-24 md:pr-4")}>
+            <ul className={clsx("flex min-w-0 flex-row items-center gap-2.5 md:gap-3.75")}>
                 <li>
                     <Link to="/">
                         <h1 className={clsx("text-[#9F9F9F] hover:text-[#black]")}>Home</h1>
@@ -27,8 +27,8 @@ const MenuSingleProduct = ({ productName }: MenuSingleProductProps) => {
                 <li>
                     <img src={IconArrowRight} alt="seta" />
                 </li>
-                <li>
-                    <h1 className={clsx("font-poppins font-regular text-[16px] text-black")}>
+                <li className="min-w-0">
+                    <h1 className={clsx("truncate font-poppins font-regular text-[16px] text-black")}>
                         {productName}
                     </h1>
                 </li>

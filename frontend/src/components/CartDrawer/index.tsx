@@ -46,7 +46,7 @@ const CartDrawer = ({ isOpen, onClose, cartButtonRef }: CartDrawerProps) => {
       }}
     >
       <aside
-        className="flex h-full max-h-screen w-[min(417px,100vw)] flex-col bg-white px-[30px] pb-[26px] pt-[26px] md:h-[746px]"
+        className="flex h-full max-h-screen w-[min(417px,100vw)] flex-col bg-white px-4 pb-[26px] pt-[26px] sm:px-[30px] md:h-[746px]"
         role="dialog"
         aria-modal="true"
         aria-labelledby="cart-drawer-title"
@@ -73,7 +73,7 @@ const CartDrawer = ({ isOpen, onClose, cartButtonRef }: CartDrawerProps) => {
             </p>
           ) : (
             items.map((item) => (
-              <div key={item.id} className="flex items-center gap-[29px]">
+              <div key={item.id} className="flex items-center gap-3 sm:gap-[29px]">
                 <img
                   src={
                     item.image.startsWith("http")
@@ -81,7 +81,7 @@ const CartDrawer = ({ isOpen, onClose, cartButtonRef }: CartDrawerProps) => {
                       : `${import.meta.env.VITE_API_URL ?? "http://localhost:3000"}${item.image}`
                   }
                   alt={item.name}
-                  className="h-[105px] w-[108px] shrink-0 rounded-[10px] bg-[#F9F1E7] object-contain"
+                  className="h-[88px] w-[88px] shrink-0 rounded-[10px] bg-[#F9F1E7] object-contain sm:h-[105px] sm:w-[108px]"
                 />
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-[16px] font-normal">{item.name}</p>

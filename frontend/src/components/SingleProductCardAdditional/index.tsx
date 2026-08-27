@@ -15,8 +15,8 @@ const SingleProductCardAdditional = ({
     <div className={clsx("flex items-center flex-col pb-9")}>
       <div
         className={clsx(
-          "flex gap-32.5 justify-center py-9",
-          "text-[24px] text-[#9f9f9f]",
+          "grid w-full grid-cols-2 gap-4 px-4 py-9 sm:flex sm:flex-wrap sm:gap-16 lg:gap-32.5",
+          "text-center text-[16px] text-[#9f9f9f] sm:text-[24px]",
         )}
       >
         <h1
@@ -51,8 +51,8 @@ const SingleProductCardAdditional = ({
               "flex gap-10 flex-wrap items-center justify-center",
             )}
           >
-            <img src={`${API_URL}${produto.images[0]}`}></img>
-            <img src={`${API_URL}${produto.images[1]}`}></img>
+            <img src={`${API_URL}${produto.images[0]}`} className="h-auto w-full max-w-[605px]"></img>
+            <img src={`${API_URL}${produto.images[1]}`} className="h-auto w-full max-w-[605px]"></img>
           </div>
           <p className={clsx("text-[16px] text-[#9f9f9f]")}>
             {produto.description}

@@ -40,8 +40,8 @@ const FilterBar = ({ totalResults, currentPage, currentLimit }: FilterBarProps) 
     const endResult = Math.min(currentPage * currentLimit, totalResults);
 
     return (
-        <div className="w-full bg-[#F9F1E7] py-6 px-4 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-6">
+        <div className="flex w-full flex-col items-center justify-between gap-4 bg-[#F9F1E7] px-4 py-6 md:flex-row md:px-12">
+            <div className="flex w-full flex-wrap items-center justify-center gap-4 md:w-auto md:justify-start md:gap-6">
                 
                 <div className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
                     <SlidersHorizontal size={19} color="black" strokeWidth={2} />
@@ -54,12 +54,12 @@ const FilterBar = ({ totalResults, currentPage, currentLimit }: FilterBarProps) 
 
                 <div className="h-9 w-px bg-[#9F9F9F] mx-2 hidden md:block"></div>
 
-                <p className="font-poppins text-base font-normal text-black">
+                <p className="w-full text-center font-poppins text-base font-normal text-black md:w-auto md:text-left">
                     Showing {startResult}–{endResult} of {totalResults} results
                 </p>
             </div>
             
-            <div className="flex items-center gap-6">
+            <div className="flex w-full flex-wrap items-center justify-center gap-4 md:w-auto md:gap-6">
                 <div className="flex items-center gap-4">
                     <label htmlFor="limit" className="font-poppins text-base font-normal text-black">Show</label>
                     <input
@@ -83,7 +83,7 @@ const FilterBar = ({ totalResults, currentPage, currentLimit }: FilterBarProps) 
                         value={currentSort}
                         onChange={handleSortChange}
                         className={clsx(
-                            "h-14 bg-white px-4 text-[#9F9F9F]",
+                            "h-14 max-w-[150px] bg-white px-3 text-[#9F9F9F] sm:max-w-none sm:px-4",
                             "font-poppins text-base outline-none cursor-pointer",
                             "border-none focus:ring-1 focus:ring-gray-300"
                         )}

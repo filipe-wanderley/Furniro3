@@ -43,7 +43,7 @@ const ProductPage = () => {
             <Container className={clsx("border-b border-[#D9D9D9]")}>
                 <div
                     className={clsx(
-                        "flex gap-26.5 justify-center flex-wrap-reverse md:px-0 px-2 pt-8.75 pb-15",
+                        "flex gap-10 justify-center flex-wrap-reverse px-4 pt-8.75 pb-15 lg:gap-26.5 lg:px-0",
                     )}>
                     <SingleProductImages images={product.images} />
                     <SingleProductCard produto={product} />

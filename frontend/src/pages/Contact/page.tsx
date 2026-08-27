@@ -25,7 +25,7 @@ const Contact = () => {
       />
       <main className="mx-auto max-w-[1058px] px-6 pb-[63px] pt-[98px] font-poppins lg:h-[1144px]">
         <div className="mb-[84px] text-center">
-          <h1 className="text-[36px] font-semibold leading-[54px]">Get In Touch With Us</h1>
+          <h1 className="text-[30px] font-semibold leading-[42px] sm:text-[36px] sm:leading-[54px]">Get In Touch With Us</h1>
           <p className="mx-auto mt-[7px] max-w-[644px] text-[16px] leading-6 text-[#9F9F9F]">
             For More Information About Our Product &amp; Services. Please Feel Free To Drop Us An Email. Our Staff Always Be There To Help You Out. Do Not Hesitate!
           </p>
@@ -128,7 +128,7 @@ const Contact = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="!mt-[49px] h-[55px] w-[237px] rounded-[5px] bg-[#B88E2F] text-white disabled:opacity-50"
+              className="!mt-[49px] h-[55px] w-full rounded-[5px] bg-[#B88E2F] text-white disabled:opacity-50 sm:w-[237px]"
             >
               Submit
             </button>

@@ -24,7 +24,7 @@ const Mosaic = () => {
       >
         #FuniroFurniture
       </h1>
-      <div className={clsx("max-w-360 w-screen overflow-hidden")}>
+      <div className={clsx("w-full max-w-360 overflow-hidden")}>
         <div className={clsx("animate-slide-loop", "w-728", "flex gap-4")}>
           <MoscaiContent></MoscaiContent>
           <MoscaiContent></MoscaiContent>

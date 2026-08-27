@@ -29,10 +29,10 @@ const Hero = () => {
         </h2>
         <h1
           className={clsx(
-            "font-bold text-over-secundary text-[32px] leading-12",
+            "font-bold text-over-secundary text-[22px] leading-8",
+            "xxs:text-[32px] xxs:leading-12",
             "md:text-[52px] md:leading-16.25",
             "sm:text-[42px] sm:leading-14",
-            "max-xxs:text-[22px] max-xxs:leading-8",
             "mb-4.25",
           )}
         >
@@ -42,8 +42,7 @@ const Hero = () => {
         <p
           className={clsx(
             "text-primary-text leading-8 font-medium",
-            "md:text-[18px]",
-            "max-xxs:text-[14px] max-xxs:leading-7 max-xxs:mb-8",
+            "text-[14px] leading-7 md:text-[18px] md:leading-8",
             "mb-11.5",
           )}
         >
