@@ -2,7 +2,7 @@ import clsx from "clsx";
 import type { RefObject } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/useAuth";
-import { User } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 
 type RightMenuProps = {
   className?: string;
@@ -27,9 +27,9 @@ const RightMenu = ({
             clearSession();
             navigate("/");
           }}
-          className={clsx(LinkHover, "text-sm")}
+          className={clsx(LinkHover)}
         >
-          Logout
+          <LogOut size={22} aria-hidden="true" />
         </button>
       ) : (
         <Link to="/login" aria-label="Open login" className={clsx(LinkHover)}>
