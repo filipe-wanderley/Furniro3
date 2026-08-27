@@ -65,7 +65,7 @@ const Checkout = () => {
         title="Checkout"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Checkout" }]}
       />
-      <main className="mx-auto grid max-w-[1242px] gap-[26px] px-6 py-[63px] font-poppins lg:grid-cols-2">
+      <main className="mx-auto grid max-w-[1242px] gap-[26px] px-6 py-[63px] font-poppins lg:h-[1829px] lg:grid-cols-2">
         <form id="checkout-form" onSubmit={handleSubmit(onSubmit)} noValidate className="px-0 pb-[71px] pt-[35px] lg:px-[74px]">
           <h1 className="mb-[29px] text-[36px] font-semibold leading-[54px]">Billing details</h1>
           <div className="grid gap-x-[30px] gap-y-[31px] sm:grid-cols-2">
@@ -244,11 +244,12 @@ const Checkout = () => {
               )}
             </label>
           </div>
-          <label className="mt-5 block">
-            Additional information
+          <label className="block">
+            <span className="sr-only">Additional information</span>
             <textarea
               {...register("additionalInformation")}
-              className={`${inputClass} min-h-28 resize-y`}
+              placeholder="Additional information"
+              className={`${inputClass} !mt-[66px] h-[75px] min-h-[75px] resize-none`}
             />
           </label>
         </form>

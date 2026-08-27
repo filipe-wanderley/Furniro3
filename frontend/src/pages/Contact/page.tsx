@@ -4,7 +4,6 @@ import toast from "react-hot-toast";
 import BannerCard from "../../components/BannerCard";
 import BenefitsCard from "../../components/BenefitsCard";
 import { contactSchema, type ContactForm } from "../../schemas/contact.schema";
-import { Clock3, MapPin, Phone } from "lucide-react";
 
 const contactInputClass =
   "mt-[22px] h-[75px] w-full rounded-[10px] border border-[#9F9F9F] px-[30px] outline-none focus:border-[#B88E2F]";
@@ -24,25 +23,25 @@ const Contact = () => {
         title="Contact"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Contact" }]}
       />
-      <main className="mx-auto max-w-[1058px] px-6 pb-[63px] pt-[98px] font-poppins">
-        <div className="mb-[64px] text-center">
+      <main className="mx-auto max-w-[1058px] px-6 pb-[63px] pt-[98px] font-poppins lg:h-[1144px]">
+        <div className="mb-[84px] text-center">
           <h1 className="text-[36px] font-semibold leading-[54px]">Get In Touch With Us</h1>
-          <p className="mx-auto max-w-[644px] text-[16px] leading-6 text-[#9F9F9F]">
+          <p className="mx-auto mt-[7px] max-w-[644px] text-[16px] leading-6 text-[#9F9F9F]">
             For More Information About Our Product &amp; Services. Please Feel Free To Drop Us An Email. Our Staff Always Be There To Help You Out. Do Not Hesitate!
           </p>
         </div>
         <div className="grid gap-14 lg:grid-cols-[393px_1fr] lg:gap-[30px]">
-          <section className="space-y-[43px] px-4 pt-[49px] lg:px-[46px]">
+          <section className="space-y-[43px] px-4 pt-[44px] lg:px-[46px]">
             <div className="flex items-start gap-[30px]">
-              <MapPin className="mt-1 size-[30px] shrink-0" fill="currentColor" />
-              <div><h2 className="text-[24px] font-medium leading-9">Address</h2>
+              <span className="flex h-[30px] w-[30px] shrink-0 justify-center"><img src="/Icons/contact-location.svg" alt="" className="h-[28px] w-[22px]" /></span>
+              <div className="pt-[12px]"><h2 className="text-[24px] font-medium leading-9">Address</h2>
               <p className="max-w-[212px] text-[16px] leading-6">
                 236 5th SE Avenue, New York NY10000, United States
               </p>
               </div>
             </div>
             <div className="flex items-start gap-[30px]">
-              <Phone className="mt-1 size-[30px] shrink-0" fill="currentColor" />
+              <img src="/Icons/contact-phone.svg" alt="" className="size-[30px] shrink-0" />
               <div><h2 className="text-[24px] font-medium leading-9">Phone</h2>
               <p className="max-w-[212px] text-[16px] leading-6">
                 Mobile: +(84) 546-6789
@@ -52,7 +51,7 @@ const Contact = () => {
               </div>
             </div>
             <div className="flex items-start gap-[30px]">
-              <Clock3 className="mt-1 size-[30px] shrink-0" fill="currentColor" />
+              <span className="flex h-[30px] w-[30px] shrink-0 justify-center"><img src="/Icons/contact-clock.svg" alt="" className="size-[23px]" /></span>
               <div><h2 className="text-[24px] font-medium leading-9">Working Time</h2>
               <p className="max-w-[212px] text-[16px] leading-6">
                 Monday-Friday: 9:00 - 22:00
@@ -65,7 +64,7 @@ const Contact = () => {
           <form
             onSubmit={handleSubmit(onSubmit)}
             noValidate
-            className="space-y-[32px] px-0 lg:px-[52px] lg:pt-[49px]"
+            className="space-y-[36px] px-0 lg:px-[52px] lg:pt-[49px]"
           >
             <label className="block">
               Your name
@@ -129,14 +128,14 @@ const Contact = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="h-[55px] w-[237px] rounded-[5px] bg-[#B88E2F] text-white disabled:opacity-50"
+              className="!mt-[49px] h-[55px] w-[237px] rounded-[5px] bg-[#B88E2F] text-white disabled:opacity-50"
             >
               Submit
             </button>
           </form>
         </div>
       </main>
-      <BenefitsCard />
+      <div className="lg:pb-[30px]"><BenefitsCard /></div>
     </>
   );
 };

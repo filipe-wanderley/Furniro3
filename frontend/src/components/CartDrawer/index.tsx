@@ -39,14 +39,14 @@ const CartDrawer = ({ isOpen, onClose, cartButtonRef }: CartDrawerProps) => {
   if (!isOpen) return null;
   return (
     <div
-      className="fixed inset-0 z-[60] flex justify-end bg-black/40"
+      className="fixed inset-0 z-[60] flex justify-end bg-black/20"
       role="presentation"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
     >
       <aside
-        className="flex h-full max-h-screen w-[min(417px,100vw)] flex-col bg-white px-[30px] pb-[28px] pt-[26px] shadow-xl"
+        className="flex h-full max-h-screen w-[min(417px,100vw)] flex-col bg-white px-[30px] pb-[26px] pt-[26px] md:h-[746px]"
         role="dialog"
         aria-modal="true"
         aria-labelledby="cart-drawer-title"
@@ -66,14 +66,14 @@ const CartDrawer = ({ isOpen, onClose, cartButtonRef }: CartDrawerProps) => {
             <ShoppingBag size={20} strokeWidth={1.5} />
           </button>
         </header>
-        <div className="min-h-0 flex-1 space-y-[20px] overflow-y-auto py-[40px]">
+        <div className="min-h-0 flex-1 space-y-[20px] overflow-y-auto py-[43px]">
           {items.length === 0 ? (
             <p className="py-10 text-center text-[#9F9F9F]">
               Your cart is empty.
             </p>
           ) : (
             items.map((item) => (
-              <div key={item.id} className="flex items-center gap-[32px]">
+              <div key={item.id} className="flex items-center gap-[29px]">
                 <img
                   src={
                     item.image.startsWith("http")
@@ -101,18 +101,18 @@ const CartDrawer = ({ isOpen, onClose, cartButtonRef }: CartDrawerProps) => {
             ))
           )}
         </div>
-        <footer className="border-t border-[#D9D9D9] pt-[22px]">
-          <div className="mb-[23px] flex justify-between text-[16px]">
+        <footer>
+          <div className="mb-[30px] flex justify-between text-[16px]">
             <span>Subtotal</span>
             <strong className="text-[#B88E2F]">
               Rs. {money(getCartSubtotal(items))}
             </strong>
           </div>
-          <div className="flex gap-3">
+          <div className="flex justify-center gap-[14px] border-t border-[#D9D9D9] pt-[27px]">
             <Link
               to="/cart"
               onClick={onClose}
-              className="h-[30px] flex-1 rounded-full border border-black px-4 text-center text-[12px] leading-[28px]"
+              className="h-[30px] rounded-full border border-black px-[30px] text-center text-[12px] leading-[28px]"
             >
               Cart
             </Link>
@@ -124,7 +124,7 @@ const CartDrawer = ({ isOpen, onClose, cartButtonRef }: CartDrawerProps) => {
               onKeyDown={(event) => {
                 if (items.length === 0) event.preventDefault();
               }}
-              className={`h-[30px] flex-1 rounded-full border border-black px-4 text-center text-[12px] leading-[28px] ${items.length === 0 ? "pointer-events-none opacity-50" : ""}`}
+              className={`h-[30px] rounded-full border border-black px-[30px] text-center text-[12px] leading-[28px] ${items.length === 0 ? "pointer-events-none opacity-50" : ""}`}
             >
               Checkout
             </Link>
